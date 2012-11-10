@@ -1,6 +1,6 @@
 <?php
-
-class datastore implements IteratorAggregate, ArrayAccess
+namespace YetAnoterLibrary\ReportHelper;
+class ArrayBase implements IteratorAggregate, ArrayAccess
 {
     protected $_data = array();
 
