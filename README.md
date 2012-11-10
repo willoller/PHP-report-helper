@@ -2,7 +2,7 @@
 
 Makes outputting data a breeze.
 
-1. Get your data
+### 1. Get your data
 
     /* transactions:
        +----------+--------+
@@ -17,11 +17,11 @@ Makes outputting data a breeze.
     */
     $data = $pdo->query("SELECT * FROM transactions");
 
-2. Place it in a new `Report`
+### 2. Place it in a new `Report`
 
     $report = new Report($data);
 
-3. Output your data
+### 3. Output your data
 
     foreach ($report as $r) {
         echo "{$r->name} {$r->amount}\n";
