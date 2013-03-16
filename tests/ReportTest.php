@@ -54,7 +54,8 @@ class ReportTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals("a", $report[0]->name);
         $this->assertEquals("e", $report[4]->name);
 
-        $this->assertEquals("d", $report->status("off")[0]->name);
+        $off = $report->status("off");
+        $this->assertEquals("d", $off[0]->name);
     }
 
     public function testTotal()
