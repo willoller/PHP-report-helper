@@ -2,7 +2,7 @@
 namespace YetAnoterLibrary\ReportHelper;
 class Report extends ArrayBase
 {
-    private $_functions = array();
+    private static $_functions = array();
 
     public function __construct($data_in = null)
     {
@@ -17,7 +17,7 @@ class Report extends ArrayBase
 
     public function add($func, $callback)
     {
-        $this->_functions[$func] = $callback;
+        self::$_functions[$func] = $callback;
     }
 
     public function rows( $index = null )
@@ -36,8 +36,9 @@ class Report extends ArrayBase
 
     public function __call($func, $args)
     {
-        if (isset($this->_functions[$func])) {
-            return call_user_func_array($this->_functions[$func], $args);
+        if (isset(self::$_functions[$func])) {
+            array_unshift($args, $this->_data);
+            return call_user_func_array(self::$_functions[$func], $args);
         } else {
             return $this->subset($func, $args[0], $this->_data);
         }
@@ -117,11 +118,11 @@ class Report extends ArrayBase
 
     public function add_default_callbacks()
     {
-        $this->add('total', function ($key = null, $round = 64) {
+        $this->add('total', function ($data, $key = null, $round = 64) {
             if ($key == null) return null;
             $total = 0;
 
-            foreach ($this->_data as $d) {
+            foreach ($data as $d) {
                 if (is_array($d) && isset($d[$key]))
                     $total += round($d[$key], $round);
                 elseif (is_object($d) && $d->$key)
@@ -131,8 +132,8 @@ class Report extends ArrayBase
             return $total;
         });
 
-        $this->add('count', function ($key = null) {
-            return (count($this->_data));
+        $this->add('count', function ($data, $key = null) {
+            return (count($data));
         });
     }
 }

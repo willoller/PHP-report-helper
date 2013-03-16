@@ -173,7 +173,7 @@ class ReportTest extends \PHPUnit_Framework_TestCase
     {
         $report = new Report($this->returnedData());
 
-        $report->add('test_func', function($a, $b, $c) {
+        $report->add('test_func', function($data, $a, $b, $c) {
             return $a * $b * $c;
         });
 
