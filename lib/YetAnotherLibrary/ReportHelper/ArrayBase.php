@@ -1,12 +1,12 @@
 <?php
 namespace YetAnoterLibrary\ReportHelper;
-class ArrayBase implements IteratorAggregate, ArrayAccess
+class ArrayBase implements \IteratorAggregate, \ArrayAccess
 {
     protected $_data = array();
 
     public function getIterator()
     {
-        return new ArrayIterator($this->_data);
+        return new \ArrayIterator($this->_data);
     }
 
     public function offsetSet($offset, $value)

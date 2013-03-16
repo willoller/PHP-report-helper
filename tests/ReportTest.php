@@ -1,9 +1,8 @@
 <?php
 
-error_reporting(-1);
-require_once('report.php');
+namespace YetAnoterLibrary\ReportHelper;
 
-class ReportTest extends PHPUnit_Framework_TestCase
+class ReportTest extends \PHPUnit_Framework_TestCase
 {
     public function returnedData()
     {
@@ -69,16 +68,7 @@ class ReportTest extends PHPUnit_Framework_TestCase
     public function testTotalException()
     {
         $report = new Report($this->returnedData());
-
-        try
-        {
-            $this->assertEquals( null, $report->total() );
-            $this->assertTrue(false);
-        }
-        catch (Exception $e)
-        {
-            $this->assertTrue(true);
-        }
+        $this->assertEquals( null, $report->total() );
     }
 
     public function testCount()
