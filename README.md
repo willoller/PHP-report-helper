@@ -76,11 +76,12 @@ Outputs:
 If the built-in functions are not sufficient, new functions can be added to the
 report object using lambdas:
 
-    $report->add('average', function($key) {
+    // $data is populated with the report data
+    $report->add('average', function($data, $key) {
         $sum   = 0;
         $count = 0;
 
-        foreach ($this->_data as $d) {
+        foreach ($data as $d) {
             $sum += $d[$key];
             $count++;
         }
@@ -90,8 +91,8 @@ report object using lambdas:
 
 Then output your data same as always:
 
-    foreach ($report->name as $name => $data) {
-        echo "{$name} Average: {$data->average("amount")}\n\n";
+    foreach ($report->name as $name => $values) {
+        echo "{$name} Average: {$values->average("amount")}\n\n";
     }
 
 Outputs:
